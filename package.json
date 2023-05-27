@@ -1,0 +1,19 @@
+{
+  "name": "fastapi",
+  "version": "1.0.0",
+  "description": "uvicorn main:app --reload --port 3001",
+  "main": "socketio.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node socketio.js",
+    "dev": "nodemon socketio.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "nodemon": "^2.0.22",
+    "socket.io": "^4.5.4",
+    "socket.io-client": "^4.5.4"
+  }
+}

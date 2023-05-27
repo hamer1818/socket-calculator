@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <style>
+        h1{
+            font-size: 50px;
+        }
+        *{
+            font-size: 20px;
+            text-align: center;
+        }
+        body{
+            background-color: #333;
+            color: #fff;
+        }
+        h1{
+            text-align: center;
+        }
+        input{
+            width: 100px;
+            height: 30px;
+            border-radius: 5px;
+            border: none;
+            margin: 5px;
+            padding: 5px;
+        }
+        button{
+            width: 100px;
+            height: 30px;
+            border-radius: 5px;
+            border: none;
+            margin: 5px;
+            padding: 5px;
+            background-color: #fff;
+            color: #333;
+            cursor: pointer;
+        }
+        textarea{
+            width: auto;
+            height: 118px;
+            border-radius: 5px;
+            border: none;
+            margin: 5px;
+            padding: 5px;
+            font-size: 95px;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <!-- <p>Socket io fast api testi</p> -->
+
+    <h1>Hesap Makinesi</h1>
+    <input type="number" id="sayi1">
+    <input type="number" id="sayi2">
+    <button id="topla">+</button>
+    <button id="cikar">-</button>
+    <button id="carp">X</button>
+    <button id="bol">/</button>
+    <textarea id="sonuc" cols="30" rows="10"></textarea>
+
+
+</body>
+<script src="https://cdn.socket.io/3.1.3/socket.io.min.js" integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh" crossorigin="anonymous"></script>
+<script >
+    $( document ).ready(function() {
+        console.log( "ready!" );
+        
+
+        const socket = io("http://localhost:8081",{transports: ["websocket", "polling", "flashsocket"] ,path:"/ws/socket.io"});
+        socket.on("toplam",data=> { 
+                console.log(data); 
+                $("#sonuc").val(data);
+
+        });
+        socket.on("cikar",data=> { 
+                console.log(data); 
+                $("#sonuc").val(data);
+
+        });
+        socket.on("carp",data=> { 
+                console.log(data);
+                $("#sonuc").val(data);
+
+        });
+        socket.on("bol",data=> { 
+                console.log(data); 
+                $("#sonuc").val(data);
+
+        });
+
+
+        $("#topla").on("click",function(){
+            let sayi1 = $("#sayi1").val();
+            let sayi2 = $("#sayi2").val();
+            sayi1 = parseInt(sayi1);
+            sayi2 = parseInt(sayi2);
+            console.log(sayi1,sayi2);
+            socket.emit("topla", [sayi1,sayi2]);  
+        })
+        $("#cikar").on("click",function(){
+            let sayi1 = $("#sayi1").val();
+            let sayi2 = $("#sayi2").val();
+            sayi1 = parseInt(sayi1);
+            sayi2 = parseInt(sayi2);
+            console.log(sayi1,sayi2);
+            socket.emit("cikar", [sayi1,sayi2]);  
+        })
+        $("#carp").on("click",function(){
+            let sayi1 = $("#sayi1").val();
+            let sayi2 = $("#sayi2").val();
+            sayi1 = parseInt(sayi1);
+            sayi2 = parseInt(sayi2);
+            console.log(sayi1,sayi2);
+            socket.emit("carp", [sayi1,sayi2]);  
+        })
+        $("#bol").on("click",function(){
+            let sayi1 = $("#sayi1").val();
+            let sayi2 = $("#sayi2").val();
+            sayi1 = parseInt(sayi1);
+            sayi2 = parseInt(sayi2);
+            console.log(sayi1,sayi2);
+            socket.emit("bol", [sayi1,sayi2]);  
+        })
+
+
+    });
+    
+  </script>  
+</html>
